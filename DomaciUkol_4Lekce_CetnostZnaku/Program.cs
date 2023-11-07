@@ -4,23 +4,38 @@
 //(Ano, pro znalejší v podstatě vytváříš typ dictionary, o kterém se budeme bavit příště :) )
 //Pokud si budeš chtít vyhrát můžeš spočítat i kolik je bílých znaků, kolik písmen je velkých, kolik malých apod. (tedy využití funkcí typu char) 
 
-string vstupniText = "Vytvoř program, který nad zadaným textem provede statistiku znaků.";
+using DomaciUkol_4Lekce_CetnostZnaku;
+using System.Collections.Generic;
 
+string vstupniText = "Sarka";
 
-while (vstupniText.Length > 0)
+List<Znak> statistika = new List<Znak>();
+
+foreach (char znak in vstupniText)
 {
-    Console.Write(vstupniText[0] + " : ");
-    int count = 0;
-    for (int j = 0; j < vstupniText.Length; j++)
-    {
-        if (vstupniText[0] == vstupniText[j])
+        Znak provereniZnaku = null;
+        for (int i = 0; i < statistika.Count; i++)
         {
-            count++;
+            if ( statistika[i].Pismeno == znak)
+            {
+                provereniZnaku = statistika[i];
+            }
         }
-    }
-    Console.WriteLine(count);
-    vstupniText = vstupniText.Replace(vstupniText[0].ToString(), string.Empty);
+
+        if (provereniZnaku != null) 
+        {
+            provereniZnaku.Pocet++;
+        }
+        else
+        {
+            statistika.Add(new Znak() { Pismeno = znak, Pocet = 1 });
+        }
 }
 
+foreach (var i in statistika)
+{
+    Console.WriteLine($"{ i.Pismeno} - {i.Pocet}" );
+
+}
 
 Console.ReadLine();
